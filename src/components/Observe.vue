@@ -15,7 +15,7 @@ export default {
         this.$emit("intersect");
       }
     }, options);
-
+    // console.log(this.$el)
     this.observer.observe(this.$el);
   },
   destroyed() {
@@ -23,3 +23,10 @@ export default {
   },
 };
 </script>
+<style scoped>
+.observer{
+  width: 100px;
+  height: 3px;
+  color: green;
+}
+</style>
