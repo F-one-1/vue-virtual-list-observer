@@ -52,6 +52,7 @@ export default {
   async mounted() {
     console.log('right')
     this.domCount = this.listItemsCount
+    console.log(this.listItemsCount)
     this.listHeight = this.$refs.list.clientHeight
     // console.log(this.$refs.list.clientHeight,'this.$refs.list.clientHeight')
     this.mapObserver = new Map()
@@ -71,7 +72,6 @@ export default {
         this.updateDomList('forward')
       }
     }, options);
-    // this.intersected()
     await this.requeset()
     this.updateDomList('backward')
   },
@@ -84,34 +84,25 @@ export default {
       if(cur==='start'){
         let myend = this.mapObserver.get('start')===-1 ? null : this.mapObserver.get('start')
         if(myend!==null){
-          console.log('取消监听')
+          console.log('取消监听首部')
           this.observerStart.unobserve(myend)
         }
-        console.log('监听');
+        console.log('监听首部');
         this.observerStart.observe(el);
         this.mapObserver.set('end',el)
       }else{
         let myend = this.mapObserver.get('end')===-1 ? null : this.mapObserver.get('end')
         if(myend!==null){
-          console.log('取消监听')
+          console.log('取消监听尾部')
           this.observerEnd.unobserve(myend)
         }
-        console.log('监听');
+        console.log('监听尾部');
         this.observerEnd.observe(el);
         this.mapObserver.set('end',el)
       }
     },
-    intersected() {
-      // if(this.arrDom === [] && this.items.length < this.listItemsCount){
-      //   this.arrDom = this.items
-      // }else if(this.arrDom === [] && this.items.length >= this.listItemsCount){
-      //   for(let i=0;i<this.listItemsCount;i++){
-      //     this.arrDom.push(this.items[i])
-      //   }
-      // }else if(true){
-      //   // 对真实DOM进行切分，维持一个总量
-      // }
-    },
+    // intersected() {
+    // },
     // 解耦
     async requeset(){
       const res = await fetch(`https://jsonplaceholder.typicode.com/comments?_page=${
@@ -121,45 +112,43 @@ export default {
       const items = await res.json();
       // let preItemsLength = this.items.length
       this.items = [...this.items, ...items];
-      // console.log(this.items,'this.items1')
+      console.log('调用接口')
     },
     updateDomList(direction){
-      // console.log(this.items,'this.items2')
       let start = this.mapObserverindex.get('start')
       let end = this.mapObserverindex.get('end')
       let itemLength = this.items.length
       let preDomLength = this.arrDom.length
       if(direction==='backward'){
-        console.log('backward')
         let finish = end+this.domCount < itemLength ? end+this.domCount : itemLength
-        console.log(finish,'this.finish',end,'end')
+        if(finish===itemLength){
+          this.requeset()
+        }
         for(let i=end;i<finish;i++){
-          // console.log(this.items.length,'this.items.length')
-          // console.log(i,'i',this.items[i],'this.items[i]')
           this.arrDom.push(this.items[i])
         }
         let countReduce = finish-end
         if(end!==start){
           this.arrDom = this.arrDom.slice(countReduce)
         }
-        this.requeset()
+        // for(let i=0;i<)
         let newStart = null
         let newEnd = null
         if(end!==start){
-          let newStart = start+countReduce
-          let newEnd = end+countReduce
+          newStart = start+countReduce
+          newEnd = end+countReduce
           this.mapObserverindex.set('start',newStart)
           this.mapObserverindex.set('end',newEnd)
         }else{
-          let newStart = start
-          let newEnd = end+countReduce
+          newStart = start
+          newEnd = end+countReduce
           this.mapObserverindex.set('start',newStart)
           this.mapObserverindex.set('end',newEnd)
         }
         this.$nextTick(()=>{
-          console.log(this.arrDom,'this.arrDOm')
           let curHeightAverage = 0
           for(let i=newStart;i<newEnd;i++){
+            console.log(newStart,newEnd)
             curHeightAverage+=this.$refs.item[0].clientHeight
             this.itemsStyle[i] = this.$refs.item[0].clientHeight
           }
@@ -179,14 +168,11 @@ export default {
         this.mapObserverindex.set('end',newEnd)
         this.arrDom = this.arrDom.slice(0,preDomLength-newStart)
         this.arrDom = preArr.concat(this.arrDom)
-
       }
       this.$nextTick(()=>{
-        // console.log(this.items,'(this.items')
-        // console.log(this.arrDom,'this.arrDOm')
-        //   console.log('what is false')
-          console.log(this.$refs.item,'this.$refs.item')
-        //   console.log(this.arrDom.length,'this.arrDom.length')
+          // console.log(this.domCount,'this.domCount')
+          // console.log(this.arrDom.length,'this.arrDom.length')
+          // console.log(this.$refs.item,'this.$refs.item')
           this.interObserver(this.$refs.item[this.arrDom.length-1],'end')
           this.interObserver(this.$refs.item[0],'start')
       })
