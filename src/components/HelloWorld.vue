@@ -50,7 +50,6 @@ export default {
     }
   },
   async mounted() {
-    console.log('right')
     this.domCount = this.listItemsCount
     console.log(this.listItemsCount)
     this.listHeight = this.$refs.list.clientHeight
@@ -73,7 +72,7 @@ export default {
       }
     }, options);
     await this.requeset()
-    this.updateDomList('backward')
+    await this.updateDomList('backward')
   },
   destroyed() {
     this.observerStart.disconnect();
@@ -89,7 +88,7 @@ export default {
         }
         console.log('监听首部');
         this.observerStart.observe(el);
-        this.mapObserver.set('end',el)
+        this.mapObserver.set('start',el)
       }else{
         let myend = this.mapObserver.get('end')===-1 ? null : this.mapObserver.get('end')
         if(myend!==null){
@@ -118,12 +117,11 @@ export default {
       let start = this.mapObserverindex.get('start')
       let end = this.mapObserverindex.get('end')
       let itemLength = this.items.length
-      let preDomLength = this.arrDom.length
+      if(this.domCount+end >= itemLength){
+        this.requeset()
+      }
       if(direction==='backward'){
         let finish = end+this.domCount < itemLength ? end+this.domCount : itemLength
-        if(finish===itemLength){
-          this.requeset()
-        }
         for(let i=end;i<finish;i++){
           this.arrDom.push(this.items[i])
         }
@@ -147,8 +145,7 @@ export default {
         }
         this.$nextTick(()=>{
           let curHeightAverage = 0
-          for(let i=newStart;i<newEnd;i++){
-            console.log(newStart,newEnd)
+          for(let i=end;i<newEnd;i++){
             curHeightAverage+=this.$refs.item[0].clientHeight
             this.itemsStyle[i] = this.$refs.item[0].clientHeight
           }
@@ -163,16 +160,18 @@ export default {
         for(let i=newStart;i<start;i++){
           preArr.push(this.items[i])
         }
-        let newEnd = preDomLength-(start-newStart)
+        let newEnd = end-(start-newStart)
         this.mapObserverindex.set('start',newStart)
         this.mapObserverindex.set('end',newEnd)
-        this.arrDom = this.arrDom.slice(0,preDomLength-newStart)
+        this.arrDom = this.arrDom.slice(0,start-newStart)
         this.arrDom = preArr.concat(this.arrDom)
+        console.log(this.arrDom,'this.arrDom','标记错误')
       }
       this.$nextTick(()=>{
           // console.log(this.domCount,'this.domCount')
           // console.log(this.arrDom.length,'this.arrDom.length')
           // console.log(this.$refs.item,'this.$refs.item')
+          console.log(this.$refs.item)
           this.interObserver(this.$refs.item[this.arrDom.length-1],'end')
           this.interObserver(this.$refs.item[0],'start')
       })
@@ -204,7 +203,7 @@ export default {
 <style lang="scss" scoped>
 .list {
   width: 600px;
-  height: 1000px;
+  height: 400px;
   overflow-x: hidden;
   overflow-y: scroll;
   border: 3px solid red;
