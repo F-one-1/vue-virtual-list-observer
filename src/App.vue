@@ -3,6 +3,15 @@
 // Check out https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup
 import ListItem from './components/HelloWorld.vue'
 import ListDOM from './components/listDOM.vue'
+let arr = []
+for (let i = 0; i < 20; i++) {
+  arr.push(i)
+}
+function request() {
+  for (let i = 1; i <= 5; i++) {
+    arr.push(i)
+  }
+}
 </script>
 
 <template>
@@ -12,7 +21,11 @@ import ListDOM from './components/listDOM.vue'
        <div class="styleitem">{{slotProps.item}}</div>
     </template>
   </ListItem> -->
-  <ListDOM></ListDOM>
+  <ListDOM :resArr="arr" @request="request">
+    <template v-slot:default="slotProps">
+      <div class="styleitem">{{ slotProps.item }}</div>
+    </template>
+  </ListDOM>
 </template>
 
 <style>
@@ -25,7 +38,14 @@ import ListDOM from './components/listDOM.vue'
   margin-top: 60px;
 }
 .styleitem {
-  width: 600px;
-  height: 2em;
+  width: 100%;
+  height: 100%;
+}
+.styleitem:nth-of-type(2n) {
+  background: #fff;
+}
+
+.styleitem:nth-of-type(2n + 1) {
+  background: #999;
 }
 </style>

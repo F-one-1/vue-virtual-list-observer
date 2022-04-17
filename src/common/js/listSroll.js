@@ -19,7 +19,7 @@ export default class ListScroll {
       itemHeight,
       container,
       listSize,
-      renderFunction
+      renderFunction,
     } = ops;
 
     if (!itemHeight || typeof itemHeight !== 'number') {
@@ -206,9 +206,9 @@ export default class ListScroll {
 
     // 观察元素开始进入视窗或者完全离开视窗的时候都会触发
     const callback = (entries) => {
-      console.log('2')
+      // console.log('2')
       entries.forEach((entry) => {
-        console.log(entry.target.className, entry.target.className.split(' '), '1')
+        // console.log(entry.target.className, entry.target.className.split(' '), '1')
         if (entry.target.className.split(' ').includes('_first')) {
           this.topItemCb(entry);
         } else if (entry.target.className.split(' ').includes('_last')) {
