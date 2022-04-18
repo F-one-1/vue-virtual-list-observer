@@ -142,6 +142,7 @@ export default class ListScroll {
     ) {
       console.log('topSentCallback.. go');
       const firstIndex = this.getWindowFirstIndex(false);
+      console.log(firstIndex, 'firstIndex')
       this.renderFunction(firstIndex);
       this.adjustPaddings(false);
 
@@ -181,7 +182,7 @@ export default class ListScroll {
     ) {
       console.log('botSentCallback.. go');
       const firstIndex = this.getWindowFirstIndex(true);
-
+      console.log(firstIndex, 'firstIndexbottom')
       this.renderFunction(firstIndex);
       this.adjustPaddings(true);
 

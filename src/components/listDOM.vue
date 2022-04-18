@@ -25,7 +25,7 @@
   </div> -->
   <div class="list" id="list" ref="list">
     <!-- <div v-for="" ref=""></div> -->
-    <div class="list-item" v-for="(item, index) in itemsArr" :key="index">
+    <div class="list-item" v-for="(item, index) in arrDom" :key="index">
       <slot :item="item"></slot>
     </div>
     <!-- <Observer @intersect="intersected"/> -->
@@ -53,7 +53,7 @@ export default {
     },
   },
   mounted() {
-    this.itemsArr = this.resArr
+    this.arrDom = this.resArr
     const container = document.getElementById('list')
     const lis = document.querySelectorAll('#m-listContainer li')
     // console.log(container,lis,'1111')
@@ -61,16 +61,18 @@ export default {
       if (firstIndex + this.domCount * 2 > this.resArr.length) {
         this.$emit('request')
         this.arrDom = this.resArr.slice(firstIndex)
+        console.log(this.resArr,'firstIndex',firstIndex)
       } else {
         this.arrDom = this.resArr.slice(
           firstIndex,
           firstIndex + this.domCount * 2
         )
       }
+      console.log(this.arrDom,'this.arrDom')
     }
     this.$nextTick(() => {
       const Node = document.querySelectorAll('.list-item')
-      console.log(Node)
+      // console.log(Node)
       Node[0].classList.add('_first')
       Node[Node.length - 1].classList.add('_last')
       renderPage(0)
@@ -83,7 +85,7 @@ export default {
         container,
         listSize: 21,
         itemHeight: 150,
-        resArr: this.itemsArr || [],
+        // resArr: this.itemsArr || [],
         renderFunction,
         //
       })
