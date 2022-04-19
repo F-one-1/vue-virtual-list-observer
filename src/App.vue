@@ -8,12 +8,10 @@ for (let i = 0; i < 20; i++) {
   arr.push(i)
 }
 function request() {
-  console.log(arr,'preArr')
-  let end = arr[arr.length-1]
-  for (let i = end+1; i <= end+10; i++) {
+  let end = arr[arr.length - 1]
+  for (let i = end + 1; i <= end + 10; i++) {
     arr.push(i)
   }
-  console.log(arr,'nowArr')
 }
 </script>
 
