@@ -20,6 +20,7 @@ export default class ListScroll {
       container,
       listSize,
       renderFunction,
+      getDomHeightFunction,
     } = ops;
 
     if (!itemHeight || typeof itemHeight !== 'number') {
@@ -42,6 +43,7 @@ export default class ListScroll {
     this.container = container;
     this.listSize = listSize;
     this.renderFunction = renderFunction;
+    this.getDomHeightFunction = getDomHeightFunction
 
     this.firstItem = document.getElementsByClassName('_first');
     this.lastItem = document.getElementsByClassName('_last')
@@ -61,19 +63,32 @@ export default class ListScroll {
   updateDomDataCache(params) {
     Object.assign(this.domDataCache, params);
   }
-
+  // 获取数组元素的和
+  getArrSum(arr, start, end) {
+    let resArr = 0
+    for (let i = start; i < end; i++) {
+      resArr += arr[i]
+    }
+    return resArr
+  }
   // 动态调整容器padding实现滚动
   // eslint-disable-next-line class-methods-use-this
-  adjustPaddings(isScrollDown) {
+  adjustPaddings(isScrollDown, firstIndex) {
+    // true 为向下滚动
     const { container, itemHeight } = this;
     const { currentPaddingTop, currentPaddingBottom } = this.domDataCache;
 
     let newCurrentPaddingTop, newCurrentPaddingBottom;
 
     // TODO 150待抽象
-    const remPaddingsVal = itemHeight * (Math.floor(this.listSize / 2));
-
+    let remPaddingsVal = itemHeight * (Math.floor(this.listSize / 2));
+    // addCount 为 变更的数量
+    let addCount = Math.floor(this.listSize / 2)
     if (isScrollDown) {
+      let domHeight = this.getDomHeightFunction()
+      let start = firstIndex - addCount;
+      let end = firstIndex
+      remPaddingsVal = this.getArrSum(domHeight, start, end)
       newCurrentPaddingTop = currentPaddingTop + remPaddingsVal;
 
       if (currentPaddingBottom === 0) {
@@ -82,8 +97,13 @@ export default class ListScroll {
         newCurrentPaddingBottom = currentPaddingBottom - remPaddingsVal;
       }
     } else {
+      let domHeight = this.getDomHeightFunction()
+      let start = firstIndex + this.listSize;
+      let end = start + addCount;
+      remPaddingsVal = this.getArrSum(domHeight, start, end)
+      newCurrentPaddingTop = currentPaddingTop + remPaddingsVal;
+      // 计算动态的remPaddingVal的值
       newCurrentPaddingBottom = currentPaddingBottom + remPaddingsVal;
-
       if (currentPaddingTop === 0) {
         newCurrentPaddingTop = 0;
       } else {
@@ -140,10 +160,11 @@ export default class ListScroll {
       && isIntersecting
       && currentRatio >= topSentinelPreviousRatio
     ) {
+      // 设置bottomTop
       console.log('topSentCallback.. go');
       const firstIndex = this.getWindowFirstIndex(false);
       this.renderFunction(firstIndex);
-      this.adjustPaddings(false);
+      this.adjustPaddings(false, firstIndex);
 
       this.updateDomDataCache({
         currentIndex: firstIndex,
@@ -180,9 +201,10 @@ export default class ListScroll {
       && isIntersecting
     ) {
       console.log('botSentCallback.. go');
+      // 设置paddingTop
       const firstIndex = this.getWindowFirstIndex(true);
       this.renderFunction(firstIndex);
-      this.adjustPaddings(true);
+      this.adjustPaddings(true, firstIndex);
 
       this.updateDomDataCache({
         currentIndex: firstIndex,

@@ -46,6 +46,7 @@ export default {
       itemsArr: null,
       arrDom: [],
       arrDomHeight: [],
+      arrDomHeightPrefix: [],
     }
   },
   props: {
@@ -65,9 +66,14 @@ export default {
     // console.log(container,lis,'1111')
     const renderPage = (firstIndex) => {
       let end = 0
+      let count = 0
+      while (firstIndex + this.domCount * 2 > this.resArr.length && count < 5) {
+        this.$emit('request')
+        count++
+      }
+      // if()
       if (firstIndex + this.domCount * 2 > this.resArr.length) {
         end = this.resArr.length
-        this.$emit('request')
         this.arrDom = this.resArr.slice(firstIndex)
         // console.log(this.resArr, 'firstIndex', firstIndex)
       } else {
@@ -77,25 +83,20 @@ export default {
           firstIndex + this.domCount * 2
         )
       }
+      // end = firstIndex + this.domCount * 2
       this.$nextTick(() => {
-        console.log(this.arrDom, 'this.arrDom2')
         for (let i = firstIndex; i < end; i++) {
-          if (i === end - 1) {
-            console.log(i, 'i')
-          }
           this.arrDomHeight[i] = this.$refs.itemDom[i - firstIndex].clientHeight
         }
-        // console.log(this.$refs.itemDom[0], 'this.$refs')
-        console.log(this.arrDomHeight, 'this.arrDomHeight')
       })
-      console.log(this.arrDom, 'this.arrDom1')
     }
     // 定义一个箭头函数，然后
     // 现在的问题是我不知道什么时候更新，哎呀，这个函数跟渲染逻辑之间割裂了跟难受呀
-
+    const getDomHeight = () => {
+      return this.arrDomHeight
+    }
     this.$nextTick(() => {
       const Node = document.querySelectorAll('.list-item')
-      // console.log(Node)
       Node[0].classList.add('_first')
       Node[Node.length - 1].classList.add('_last')
       renderPage(0)
@@ -103,24 +104,22 @@ export default {
       const renderFunction = (firstIndex) => {
         renderPage(firstIndex)
       }
+      const getDomHeightFunction = () => {
+        return getDomHeight()
+      }
 
       const listScrollIns = new ListScroll({
         container,
-        listSize: 21,
+        listSize: 20,
         itemHeight: 150,
         // resArr: this.itemsArr || [],
         renderFunction,
-        //
+        // 动态的获取DOM的高度
+        getDomHeightFunction,
       })
 
       listScrollIns.startObserver()
     })
-    // console.log(Node)
-    // // const updateDb = (offset, limit = 10) => {
-    // //     for (let i = 0; i < limit; i++) {
-    // //         dbData.push(offset + i);
-    // //     }
-    // // };
 
     // renderPage(0)
 
