@@ -1,7 +1,6 @@
 <script setup>
 // This starter template is using Vue 3 <script setup> SFCs
 // Check out https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup
-import ListItem from './components/HelloWorld.vue'
 import ListDOM from './components/listDOM.vue'
 let arr = []
 for (let i = 0; i < 20; i++) {
