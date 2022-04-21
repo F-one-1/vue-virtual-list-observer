@@ -43,6 +43,11 @@
     "component",
     "virtual-list",
     "IntersectionObserver",
-    "list"
+    "list",
+    "vue",
+    "big-data",
+    "big-list",
+    "scroll-list",
+    "virtual-list"
   ]
 }

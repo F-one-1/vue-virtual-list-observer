@@ -58,6 +58,10 @@ export default {
       type: Number,
       default: 10,
     },
+    domHeight: {
+      type: Number,
+      default: 150
+    }
   },
   mounted() {
     this.arrDom = this.resArr
@@ -164,11 +168,5 @@ export default {
 .list {
   display: flex;
   flex-direction: column;
-  &-item {
-    height: 150px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
 }
 </style>

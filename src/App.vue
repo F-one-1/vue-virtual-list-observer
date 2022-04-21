@@ -39,7 +39,7 @@ function request() {
 }
 .styleitem {
   width: 100%;
-  height: 100%;
+  height: 150px;
 }
 .styleitem:nth-of-type(2n) {
   background: #fff;
