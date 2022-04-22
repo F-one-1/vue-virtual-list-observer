@@ -1,28 +1,4 @@
 <template>
-  <!-- <div id="J_wrap" class="wrap">
-    <ul id="m-listContainer">
-      <li id="item-first" class="1" First></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li id="item-last" class="2" Last></li>
-    </ul>
-  </div> -->
   <div class="list" id="list" ref="list">
     <!-- <div v-for="" ref=""></div> -->
     <div
@@ -54,9 +30,9 @@ export default {
       type: Array,
       default: [],
     },
-    domCount: {
+    visualDomCount: {
       type: Number,
-      default: 10,
+      default: 5,
     },
     domHeight: {
       type: Number,
@@ -71,23 +47,22 @@ export default {
     const renderPage = (firstIndex) => {
       let end = 0
       let count = 0
-      while (firstIndex + this.domCount * 2 > this.resArr.length && count < 5) {
+      while (firstIndex + this.visualDomCount * 5 > this.resArr.length && count < 5) {
         this.$emit('request')
         count++
       }
       // if()
-      if (firstIndex + this.domCount * 2 > this.resArr.length) {
+      if (firstIndex + this.visualDomCount * 5 > this.resArr.length) {
         end = this.resArr.length
         this.arrDom = this.resArr.slice(firstIndex)
         // console.log(this.resArr, 'firstIndex', firstIndex)
       } else {
-        end = firstIndex + this.domCount * 2
+        end = firstIndex + this.visualDomCount * 5
         this.arrDom = this.resArr.slice(
           firstIndex,
-          firstIndex + this.domCount * 2
+          firstIndex + this.visualDomCount * 5
         )
       }
-      // end = firstIndex + this.domCount * 2
       this.$nextTick(() => {
         for (let i = firstIndex; i < end; i++) {
           this.arrDomHeight[i] = this.$refs.itemDom[i - firstIndex].clientHeight
@@ -114,8 +89,8 @@ export default {
 
       const listScrollIns = new ListScroll({
         container,
-        listSize: 20,
-        itemHeight: 150,
+        listSize: this.visualDomCount*5,
+        itemHeight: this.domHeight,
         // resArr: this.itemsArr || [],
         renderFunction,
         // 动态的获取DOM的高度
@@ -125,46 +100,11 @@ export default {
       listScrollIns.startObserver()
     })
 
-    // renderPage(0)
-
-    // const renderFunction = (firstIndex) => {
-    //   renderPage(firstIndex)
-    // }
-
-    // const listScrollIns = new ListScroll({
-    //   container,
-    //   listSize: 21,
-    //   itemHeight: 150,
-    //   resArr: this.itemsArr || [],
-    //   renderFunction,
-    //   //
-    // })
-
-    // listScrollIns.startObserver()
   },
 }
 </script>
 
 <style lang="scss" scoped>
-/* .wrap{padding: 10px;} */
-
-// #m-listContainer li {
-//   height: 150px;
-//   font-size: 25px;
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   color: red;
-// }
-
-// #m-listContainer li:nth-of-type(2n) {
-//   background: #fff;
-// }
-
-// #m-listContainer li:nth-of-type(2n + 1) {
-//   background: #999;
-// }
-
 .list {
   display: flex;
   flex-direction: column;

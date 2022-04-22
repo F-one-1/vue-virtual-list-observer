@@ -1,8 +1,7 @@
-import ListDOM from './components/listDOM.vue'
-const install = (app) => {
-  app.component(ListDOM.name, ListDOM)
-}
 
-export default {
-  install
-}
+import ListDOM from './components/listDOM.vue'
+
+// const ListDOM = app.component(myListDOM.name, myListDOM)
+
+
+export { ListDOM  };

@@ -1,8 +1,4 @@
 
-// 异步方案：
-// 该方案实际上是用padding代替本来应该存在的可视区域之外的dom元素
-// 因此往回渲染之前已经浏览过的位置时，前端需要缓存之前的数据实现同步渲染，不缓存之前的数据重新请求进行异步渲染则需要采用墓碑避免出现空白
-// 而第一次渲染不存在的区域，则可以进行loading异步渲染（组件需要为外部添加标志位试试）
 export default class ListScroll {
   constructor(options) {
     this.opsCheck(options);
