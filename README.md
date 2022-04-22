@@ -14,7 +14,10 @@ keyword: intersectionObserver scroll-list
 
 * Callback function, which allows the dynamic addition of list items according to the scrolling situation
 
-![ezgif.com-gif-maker](C:\Users\2001\Downloads\ezgif.com-gif-maker.gif)
+
+
+![ezgif com-gif-maker](https://user-images.githubusercontent.com/68687740/164702061-80e813e4-232b-4345-a2d3-00fe61ab019a.gif)
+
 ## live demo
 codeSandBox[Not Work](https://codesandbox.io/s/youthful-thompson-xetg84?file=/src/App.vue)
 > I'm confused. I can't find the corresponding vue-virtual-list-observer Dependency in codesandbox,may be because the npm is new, so It may  will work currently 
