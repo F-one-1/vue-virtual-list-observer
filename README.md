@@ -1,4 +1,4 @@
-## vue-virtual-list
+## vue-virtual-list-observer
 
 keyword: intersectionObserver scroll-list
 
