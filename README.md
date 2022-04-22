@@ -19,7 +19,9 @@ keyword: intersectionObserver scroll-list
 ```
 npm install vue-virtual-list-observer 
 ```
+
 or
+
 ```
 yarn add vue-virtual-list-observer
 ```
@@ -28,9 +30,15 @@ yarn add vue-virtual-list-observer
 
 ### Required props
 
-| **&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Prop&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;** | **Type**  | **Description**   
-       
-|------------------|------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `data-key`       | String\|Function | The unique key get from `data-sources` in each data object. Or a function called with each `data-source` and return their unique key. Its value **must be unique** in `data-sources`, it is used for identifying item size. |
-| `data-sources`   | Array[Object]    | The source array built for list, each array data must be an object and has an unique key get or generate for `data-key` property.                                                                                           |
-| `data-component` | Component        | The render item component created / declared by vue, and it will use the data object in `data-sources` as render prop and named: `source`.                                                                                  |
+| **&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Prop&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;** | **Type** | **Description**                                              |
+| ------------------------------------------------------------ | -------- | :----------------------------------------------------------- |
+| visualDomCount                                               | Number   | Number of elements visible in the list.It is worth noting that the number of render Doms is usually greater than the number of visualDoms |
+| resArr                                                       | Array[]  | The source array built for list, The effect and logic are the same as the real list |
+| domHeight                                                    | Number   | The component automatically supports the dynamic height of elements,But that still need to give an approximate element height to deal with some extreme cases, |
+
+## Public methods (emit)
+
+| Method  | Description                                                  |
+| :------ | ------------------------------------------------------------ |
+| request | Event triggered when the scroll bar scrolls to the bottom，Attention that the bottom is the end of resArr,Not the the end of visualDomList.             (Typically, request and pushes new data into resarr) |
+
