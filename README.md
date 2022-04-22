@@ -15,7 +15,10 @@ keyword: intersectionObserver scroll-list
 * Callback function, which allows the dynamic addition of list items according to the scrolling situation
 
 ## live demo
+codeSandBox[Not Work](https://codesandbox.io/s/youthful-thompson-xetg84?file=/src/App.vue)
+> I'm confused. I can't find the corresponding vue-virtual-list-observer Dependency in codesandbox,may be because the npm is new, so It may  will work currently 
 
+now you only can `git clone` and `yarn && yarn dev` to View the effects of components
 ```
 npm install vue-virtual-list-observer 
 ```
