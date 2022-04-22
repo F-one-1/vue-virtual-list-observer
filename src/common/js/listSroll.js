@@ -75,7 +75,7 @@ export default class ListScroll {
     const { currentPaddingTop, currentPaddingBottom } = this.domDataCache;
 
     let newCurrentPaddingTop, newCurrentPaddingBottom;
-
+    // console.log('adjustPaddings', isScrollDown, firstIndex);
     // TODO 150待抽象
     let remPaddingsVal = itemHeight * (Math.floor(this.listSize / 2));
     // addCount 为 变更的数量
@@ -93,11 +93,16 @@ export default class ListScroll {
         newCurrentPaddingBottom = currentPaddingBottom - remPaddingsVal;
       }
     } else {
-      let domHeight = this.getDomHeightFunction()
-      let start = firstIndex + this.listSize;
-      let end = start + addCount;
-      remPaddingsVal = this.getArrSum(domHeight, start, end)
+      if(firstIndex!==0){
+        let domHeight = this.getDomHeightFunction()
+        let start = firstIndex + this.listSize;
+        let end = start + addCount;
+        remPaddingsVal = this.getArrSum(domHeight, start, end)
+      }
+      // console.log('domHeight', domHeight, start, end);
+      // remPaddingsVal = this.getArrSum(domHeight, start, end)
       newCurrentPaddingTop = currentPaddingTop + remPaddingsVal;
+      console.log(newCurrentPaddingTop, remPaddingsVal, currentPaddingTop, 'newCurrentPaddingTop remPaddingsVal currentPaddingTop');
       // 计算动态的remPaddingVal的值
       newCurrentPaddingBottom = currentPaddingBottom + remPaddingsVal;
       if (currentPaddingTop === 0) {
@@ -107,9 +112,11 @@ export default class ListScroll {
       }
     }
 
+
+    console.log(newCurrentPaddingBottom, newCurrentPaddingTop, 'newCurrentPaddingBottom, newCurrentPaddingTop');
     container.style.paddingBottom = `${newCurrentPaddingBottom}px`;
     container.style.paddingTop = `${newCurrentPaddingTop}px`;
-
+    // console.log(container.style,'contain.style')
     this.updateDomDataCache({
       currentPaddingTop: newCurrentPaddingTop,
       currentPaddingBottom: newCurrentPaddingBottom
@@ -161,7 +168,7 @@ export default class ListScroll {
       const firstIndex = this.getWindowFirstIndex(false);
       this.renderFunction(firstIndex);
       this.adjustPaddings(false, firstIndex);
-
+      console.log('topSentCallback.. done');
       this.updateDomDataCache({
         currentIndex: firstIndex,
         topSentinelPreviousY: currentY,
@@ -201,7 +208,6 @@ export default class ListScroll {
       const firstIndex = this.getWindowFirstIndex(true);
       this.renderFunction(firstIndex);
       this.adjustPaddings(true, firstIndex);
-
       this.updateDomDataCache({
         currentIndex: firstIndex,
         bottomSentinelPreviousY: currentY,

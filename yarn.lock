@@ -1469,49 +1469,6 @@ vue-router@^4.0.11:
   dependencies:
     "@vue/devtools-api" "^6.0.0"
 
-vue-virtual-list-observer@^0.0.1:
-  version "0.0.1"
-  resolved "https://registry.npmjs.org/vue-virtual-list-observer/-/vue-virtual-list-observer-0.0.1.tgz#7fdf91d2d1502d365ffe42de8b5abb359b612ee3"
-  integrity sha512-svDkttbkH7zsjehc25KQw2okxb8zAgu6JqxrMnnTXaGgUxPoYpMYWOuPIQbdEMksjHy35h2doApbsS/g8qywzQ==
-  dependencies:
-    rollup-plugin-postcss "^4.0.0"
-    rollup-plugin-terser "^7.0.2"
-    rollup-plugin-vue "^6.0.0"
-    vue "^3.2.25"
-    vue-router "^4.0.11"
-    vue-virtual-scroll-list "^2.3.3"
-
-vue-virtual-list-observer@^0.0.2:
-  version "0.0.2"
-  resolved "https://registry.npmjs.org/vue-virtual-list-observer/-/vue-virtual-list-observer-0.0.2.tgz#214fb7218f2c6acb9341719ceb6787690f3dd399"
-  integrity sha512-BcnOvmoQDrHm72/pkjUOChoGhEBjy1EZieSkaHheeRWRQDKANxNVk+xTdW6Fy84OfqRqolmr8VsuUwm+UHX/dQ==
-  dependencies:
-    rollup-plugin-postcss "^4.0.0"
-    rollup-plugin-terser "^7.0.2"
-    rollup-plugin-vue "^6.0.0"
-    vue "^3.2.25"
-    vue-router "^4.0.11"
-    vue-virtual-list-observer "^0.0.1"
-    vue-virtual-scroll-list "^2.3.3"
-
-vue-virtual-list-observer@^0.0.3:
-  version "0.0.3"
-  resolved "https://registry.npmjs.org/vue-virtual-list-observer/-/vue-virtual-list-observer-0.0.3.tgz#a8b78f9d6c5361f1357b404bd5a98ef4886e4444"
-  integrity sha512-uZ4y9fkEPlCWGqjgAR//3zcBkN7rTac1LWSgnZurScMINBsSPKDb0mKpZomJ9F/EWfz8k2TsSNeshCADtMDjAw==
-  dependencies:
-    rollup-plugin-postcss "^4.0.0"
-    rollup-plugin-terser "^7.0.2"
-    rollup-plugin-vue "^6.0.0"
-    vue "^3.2.25"
-    vue-router "^4.0.11"
-    vue-virtual-list-observer "^0.0.2"
-    vue-virtual-scroll-list "^2.3.3"
-
-vue-virtual-scroll-list@^2.3.3:
-  version "2.3.3"
-  resolved "https://registry.npmmirror.com/vue-virtual-scroll-list/-/vue-virtual-scroll-list-2.3.3.tgz#290f0d04be814b93585f2ef232097b671141e5b1"
-  integrity sha512-heuwlZ+lEdcVSp66CpVXnyNdsiHl/XU1cvqJb0yUHGlLv6DGK8OX16FH8I3w/wKNXtHSPF9itdBBGJFrXkyHeg==
-
 vue@^3.2.25:
   version "3.2.31"
   resolved "https://registry.npmmirror.com/vue/-/vue-3.2.31.tgz#e0c49924335e9f188352816788a4cca10f817ce6"
