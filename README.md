@@ -49,3 +49,26 @@ yarn add vue-virtual-list-observer
 | :------ | ------------------------------------------------------------ |
 | request | Event triggered when the scroll bar scrolls to the bottom，Attention that the bottom is the end of resArr,Not the the end of visualDomList.             (Typically, request and pushes new data into resarr) |
 
+## quickStart
+
+```vue
+<script setup>
+// This starter template is using Vue 3 <script setup> SFCs
+// Check out https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup
+import ListDOM from './components/listDOM.vue'
+</script>
+
+<template>
+  <div class="mylist">
+    <ListDOM :resArr="arr" :visualDomCount="4" :domHeight="150" @request="request">
+      <template v-slot:default="slotProps">
+        <div class="styleitem" :class="{actived: slotProps.item.key%2===1,deactived: slotProps.item.key%2===0}">
+          <div class="styleitem-key">{{ slotProps.item.key }}</div>
+          <div class="styleitem-value">{{ slotProps.item.value }}</div>
+        </div>
+      </template>
+    </ListDOM>
+  </div>
+</template>
+
+```
