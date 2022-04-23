@@ -20,9 +20,8 @@ keyword: intersectionObserver scroll-list
 
 ## live demo1
 [codeSandBox](https://codesandbox.io/s/youthful-thompson-xetg84)
-> I'm confused. I can't find the corresponding vue-virtual-list-observer Dependency in codesandbox,may be because the npm is new, so It may  will work currently 
 
-now you only can `git clone` and `yarn && yarn dev` to View the effects of components
+
 ```
 npm install vue-virtual-list-observer 
 ```
