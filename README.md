@@ -49,6 +49,6 @@ yarn add vue-virtual-list-observer
 | :------ | ------------------------------------------------------------ |
 | request | Event triggered when the scroll bar scrolls to the bottom，Attention that the bottom is the end of resArr,Not the the end of visualDomList.             (Typically, request and pushes new data into resarr) |
 
-## quickStart
+## quickStart1
 
 [codeSandBox](https://codesandbox.io/s/youthful-thompson-xetg84)
