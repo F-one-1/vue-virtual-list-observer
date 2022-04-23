@@ -1469,6 +1469,29 @@ vue-router@^4.0.11:
   dependencies:
     "@vue/devtools-api" "^6.0.0"
 
+vue-virtual-list-observer@^0.0.8:
+  version "0.0.8"
+  resolved "https://registry.npmjs.org/vue-virtual-list-observer/-/vue-virtual-list-observer-0.0.8.tgz#e6c1cafccba4138f1e8148b9e308e8b29bc26690"
+  integrity sha512-Tic/lMUhK3fL/qNq4Ub1s8MVdISqO1r2bMQICf0ZJCJMOla+RLz8EIwSxMUycVaWwi8DyGuKk+GySMs3Fc+xLg==
+  dependencies:
+    rollup-plugin-postcss "^4.0.0"
+    rollup-plugin-terser "^7.0.2"
+    rollup-plugin-vue "^6.0.0"
+    vue "^3.2.25"
+    vue-router "^4.0.11"
+
+vue-virtual-list-observer@^0.0.9:
+  version "0.0.9"
+  resolved "https://registry.npmjs.org/vue-virtual-list-observer/-/vue-virtual-list-observer-0.0.9.tgz#9695b1b8071678882c81530844fcf4139dd8748b"
+  integrity sha512-HpR7gchnPDrQrCcA8fCmrQ5yvt5OnPs2RPGIMYxCE6g5upydwlZFw04IRIEs3GSiph8cSbCpDALIRchM8g4EGA==
+  dependencies:
+    rollup-plugin-postcss "^4.0.0"
+    rollup-plugin-terser "^7.0.2"
+    rollup-plugin-vue "^6.0.0"
+    vue "^3.2.25"
+    vue-router "^4.0.11"
+    vue-virtual-list-observer "^0.0.8"
+
 vue@^3.2.25:
   version "3.2.31"
   resolved "https://registry.npmmirror.com/vue/-/vue-3.2.31.tgz#e0c49924335e9f188352816788a4cca10f817ce6"

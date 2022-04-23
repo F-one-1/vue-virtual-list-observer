@@ -1,7 +1,7 @@
 <script setup>
 // This starter template is using Vue 3 <script setup> SFCs
 // Check out https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup
-import ListDOM from './components/listDOM.vue'
+import {ListDOM} from 'vue-virtual-list-observer'
 // import {ListDOM} from '../dist/vue-virtual-list.es'
 // import 
 let arr = []
