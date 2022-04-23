@@ -19,7 +19,7 @@ keyword: intersectionObserver scroll-list
 ![ezgif com-gif-maker](https://user-images.githubusercontent.com/68687740/164702061-80e813e4-232b-4345-a2d3-00fe61ab019a.gif)
 
 ## live demo1
-codeSandBox[Not Work](https://codesandbox.io/s/youthful-thompson-xetg84)
+[codeSandBox](https://codesandbox.io/s/youthful-thompson-xetg84)
 > I'm confused. I can't find the corresponding vue-virtual-list-observer Dependency in codesandbox,may be because the npm is new, so It may  will work currently 
 
 now you only can `git clone` and `yarn && yarn dev` to View the effects of components
@@ -51,24 +51,4 @@ yarn add vue-virtual-list-observer
 
 ## quickStart
 
-```vue
-<script setup>
-// This starter template is using Vue 3 <script setup> SFCs
-// Check out https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup
-import ListDOM from './components/listDOM.vue'
-</script>
-
-<template>
-  <div class="mylist">
-    <ListDOM :resArr="arr" :visualDomCount="4" :domHeight="150" @request="request">
-      <template v-slot:default="slotProps">
-        <div class="styleitem" :class="{actived: slotProps.item.key%2===1,deactived: slotProps.item.key%2===0}">
-          <div class="styleitem-key">{{ slotProps.item.key }}</div>
-          <div class="styleitem-value">{{ slotProps.item.value }}</div>
-        </div>
-      </template>
-    </ListDOM>
-  </div>
-</template>
-
-```
+[codeSandBox](https://codesandbox.io/s/youthful-thompson-xetg84)
