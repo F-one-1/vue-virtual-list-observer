@@ -102,7 +102,7 @@ export default class ListScroll {
       // console.log('domHeight', domHeight, start, end);
       // remPaddingsVal = this.getArrSum(domHeight, start, end)
       newCurrentPaddingTop = currentPaddingTop + remPaddingsVal;
-      console.log(newCurrentPaddingTop, remPaddingsVal, currentPaddingTop, 'newCurrentPaddingTop remPaddingsVal currentPaddingTop');
+      // console.log(newCurrentPaddingTop, remPaddingsVal, currentPaddingTop, 'newCurrentPaddingTop remPaddingsVal currentPaddingTop');
       // 计算动态的remPaddingVal的值
       newCurrentPaddingBottom = currentPaddingBottom + remPaddingsVal;
       if (currentPaddingTop === 0) {
@@ -113,7 +113,7 @@ export default class ListScroll {
     }
 
 
-    console.log(newCurrentPaddingBottom, newCurrentPaddingTop, 'newCurrentPaddingBottom, newCurrentPaddingTop');
+    // console.log(newCurrentPaddingBottom, newCurrentPaddingTop, 'newCurrentPaddingBottom, newCurrentPaddingTop');
     container.style.paddingBottom = `${newCurrentPaddingBottom}px`;
     container.style.paddingTop = `${newCurrentPaddingTop}px`;
     // console.log(container.style,'contain.style')
@@ -246,7 +246,23 @@ export default class ListScroll {
     this.observer.observe(this.firstItem[0]);
     this.observer.observe(this.lastItem[0]);
   }
-
+  list(){
+    this.domDataCache = {
+      currentIndex: 0,
+      currentPaddingTop: 0,
+      currentPaddingBottom: 0,
+      topSentinelPreviousY: 0,
+      topSentinelPreviousRatio: 0,
+      bottomSentinelPreviousY: 0,
+      bottomSentinelPreviousRatio: 0
+    };
+    console.log('reset 操作')
+    this.renderFunction(0)
+    console.log(this.container.style.paddingTop,'this.container.style.paddingTop')
+    this.container.style.paddingTop = `0px`;
+    this.container.style.paddingBottom = `0px`;
+    this.startObserver()
+  }
   // 开始监测
   startObserver() {
     this.initIntersectionObserver();

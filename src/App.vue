@@ -1,7 +1,8 @@
 <script setup>
 // This starter template is using Vue 3 <script setup> SFCs
-// Check out https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup
-import {ListDOM} from 'vue-virtual-list-observer'
+// Check out https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup'
+import { ref } from 'vue';
+import ListDOM from './components/listDOM.vue'
 // import {ListDOM} from '../dist/vue-virtual-list.es'
 // import 
 let arr = []
@@ -11,7 +12,9 @@ for (let i = 0; i < 20; i++) {
     'value': 'who am I'
   })
 }
+let loader = false
 function request() {
+  loader = true
   let end = arr[arr.length - 1].key
   for (let i = end + 1; i <= end + 10; i++) {
     arr.push({
@@ -20,21 +23,30 @@ function request() {
   })
   }
 }
+const list = ref(null)
+const mylist = ref(null)
+const reset = () => {
+  mylist.value.scrollTop = 0
+  list.value.reset()
+}
+
+
 </script>
 
 <template>
-  <!-- <ListItem>
-    <template v-slot:default="slotProps" >
-       <div class="styleitem">{{slotProps.item}}</div>
-    </template>
-  </ListItem> -->
-  <div class="mylist">
-    <ListDOM :resArr="arr" :visualDomCount="4" :domHeight="150" @request="request">
-      <template v-slot:default="slotProps">
+  <div>
+    <button @click="reset">reset</button>
+  </div>
+  <div class="mylist" ref="mylist">
+    <ListDOM ref="list" :resArr="arr" :visualDomCount="4" :domHeight="150" @request="request">
+      <template v-slot:list="slotProps">
         <div class="styleitem" :class="{actived: slotProps.item.key%2===1,deactived: slotProps.item.key%2===0}">
           <div class="styleitem-key">{{ slotProps.item.key }}</div>
           <div class="styleitem-value">{{ slotProps.item.value }}</div>
         </div>
+      </template>
+      <template v-slot:footer>
+        <div v-show='loader' class="loader"></div>
       </template>
     </ListDOM>
   </div>
@@ -85,5 +97,56 @@ function request() {
 .mylist::-webkit-scrollbar {
   width: 6px;
 }
-
+.loader {
+    font-size: 10px;
+    margin: 0px auto;
+    text-indent: -9999em;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: #ffffff;
+    background: linear-gradient(to right, #9b4dca 10%, rgba(255, 255, 255, 0) 42%);
+    position: relative;
+    animation: load3 1.4s infinite linear;
+    transform: translateZ(0);
+  }
+  .loader:before {
+    width: 50%;
+    height: 50%;
+    background: #9b4dca;
+    border-radius: 100% 0 0 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    content: '';
+  }
+  .loader:after {
+    background: #ffffff;
+    width: 75%;
+    height: 75%;
+    border-radius: 50%;
+    content: '';
+    margin: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+  }
+  @-webkit-keyframes load3 {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  @keyframes load3 {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
 </style>

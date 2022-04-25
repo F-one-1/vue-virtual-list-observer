@@ -7,10 +7,11 @@
       :key="index"
       ref="itemDom"
     >
-      <slot :item="item"></slot>
+      <slot name="list" :item="item"></slot>
     </div>
     <!-- <Observer @intersect="intersected"/> -->
   </div>
+  <slot name="footer"></slot>
 </template>
 
 <script>
@@ -23,8 +24,11 @@ export default {
       arrDom: [],
       arrDomHeight: [],
       arrDomHeightPrefix: [],
+      listScrollIns: null,
+      container: null
     }
   },
+  emits: ['request'],
   props: {
     resArr: {
       type: Array,
@@ -41,7 +45,7 @@ export default {
   },
   mounted() {
     this.arrDom = this.resArr
-    const container = document.getElementById('list')
+    this.container = document.getElementById('list')
     const lis = document.querySelectorAll('#m-listContainer li')
     // console.log(container,lis,'1111')
     const renderPage = (firstIndex) => {
@@ -87,8 +91,8 @@ export default {
         return getDomHeight()
       }
 
-      const listScrollIns = new ListScroll({
-        container,
+      this.listScrollIns = new ListScroll({
+        container: this.container,
         listSize: this.visualDomCount*5,
         itemHeight: this.domHeight,
         // resArr: this.itemsArr || [],
@@ -97,10 +101,28 @@ export default {
         getDomHeightFunction,
       })
 
-      listScrollIns.startObserver()
+      this.listScrollIns.startObserver()
     })
-
   },
+  methods: {
+    scrollToTop: function(){
+      // console.log(this.listScrollIns)
+      this.listScrollIns.scrollToTop()
+    },
+    // setScroll: function(v){
+    //   this.$refs.list.scrollTop = v
+    // },
+    // getDom: function(index){
+    //   return this.list.list[0]
+    // },
+    // getDoms: function(){
+    //   return this.$refs.list
+    // },
+
+    getScroll: function(){
+      return this.$refs.list.scrollTop
+    }
+  }
 }
 </script>
 
