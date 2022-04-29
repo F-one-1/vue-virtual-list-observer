@@ -43,7 +43,7 @@ export default class ListScroll {
 
     this.firstItem = document.getElementsByClassName('_first');
     this.lastItem = document.getElementsByClassName('_last')
-
+    this.startEntry = 0
 
     this.domDataCache = {
       currentPaddingTop: 0,
@@ -71,6 +71,10 @@ export default class ListScroll {
   // eslint-disable-next-line class-methods-use-this
   adjustPaddings(isScrollDown, firstIndex) {
     // true 为向下滚动
+    if (firstIndex === 0 && isScrollDown === false && this.startEntry === 0) {
+      this.startEntry = 1
+      return false
+    }
     const { container, itemHeight } = this;
     const { currentPaddingTop, currentPaddingBottom } = this.domDataCache;
 
@@ -93,7 +97,7 @@ export default class ListScroll {
         newCurrentPaddingBottom = currentPaddingBottom - remPaddingsVal;
       }
     } else {
-      if(firstIndex!==0){
+      if (firstIndex !== 0) {
         let domHeight = this.getDomHeightFunction()
         let start = firstIndex + this.listSize;
         let end = start + addCount;
@@ -146,7 +150,7 @@ export default class ListScroll {
     return firstIndex;
   }
 
-  topItemCb(entry) {
+  async topItemCb(entry) {
     const {
       topSentinelPreviousY,
       topSentinelPreviousRatio
@@ -166,10 +170,9 @@ export default class ListScroll {
       // 设置bottomTop
       console.log('topSentCallback.. go');
       const firstIndex = this.getWindowFirstIndex(false);
-      this.renderFunction(firstIndex);
-      this.adjustPaddings(false, firstIndex);
-      console.log('topSentCallback.. done');
-      this.updateDomDataCache({
+      await this.renderFunction(firstIndex);
+      await this.adjustPaddings(false, firstIndex);
+      await this.updateDomDataCache({
         currentIndex: firstIndex,
         topSentinelPreviousY: currentY,
         topSentinelPreviousRatio: currentRatio
@@ -182,7 +185,7 @@ export default class ListScroll {
     }
   }
 
-  bottomItemCb(entry) {
+  async bottomItemCb(entry) {
     const {
       bottomSentinelPreviousY,
       bottomSentinelPreviousRatio
@@ -206,9 +209,9 @@ export default class ListScroll {
       console.log('botSentCallback.. go');
       // 设置paddingTop
       const firstIndex = this.getWindowFirstIndex(true);
-      this.renderFunction(firstIndex);
-      this.adjustPaddings(true, firstIndex);
-      this.updateDomDataCache({
+      await this.renderFunction(firstIndex);
+      await this.adjustPaddings(true, firstIndex);
+      await this.updateDomDataCache({
         currentIndex: firstIndex,
         bottomSentinelPreviousY: currentY,
         bottomSentinelPreviousRatio: currentRatio
@@ -246,7 +249,7 @@ export default class ListScroll {
     this.observer.observe(this.firstItem[0]);
     this.observer.observe(this.lastItem[0]);
   }
-  list(){
+  scrollToTop() {
     this.domDataCache = {
       currentIndex: 0,
       currentPaddingTop: 0,
@@ -258,7 +261,7 @@ export default class ListScroll {
     };
     console.log('reset 操作')
     this.renderFunction(0)
-    console.log(this.container.style.paddingTop,'this.container.style.paddingTop')
+    console.log(this.container.style.paddingTop, 'this.container.style.paddingTop')
     this.container.style.paddingTop = `0px`;
     this.container.style.paddingBottom = `0px`;
     this.startObserver()
