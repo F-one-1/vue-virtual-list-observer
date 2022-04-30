@@ -42,9 +42,18 @@ export default {
       type: Number,
       default: 150,
     },
+    listHeight: {
+      type: Number,
+    },
+    scrollInstance: {},
   },
   inject: ['request'],
   mounted() {
+    // let dom = this.scrollInstance()
+    // console.log(dom, 'this.scrollInstance')
+    const scrollDom = this.scrollInstance()
+    this.$refs.list.style.height = `${this.listHeight}px`
+    console.log(this.$refs.list.style)
     this.arrDom = this.resArr
     this.container = document.getElementById('list')
     const lis = document.querySelectorAll('#m-listContainer li')
@@ -109,6 +118,8 @@ export default {
         renderFunction,
         // 动态的获取DOM的高度
         getDomHeightFunction,
+        scrollDom: scrollDom,
+        // _setScoll: this._setScoll,
       })
 
       this.listScrollIns.startObserver()
@@ -117,11 +128,24 @@ export default {
   methods: {
     scrollToTop: function () {
       // console.log(this.listScrollIns)
+      let scrollList = this.scrollInstance()
+      // console.log(scrollList.scrollTop)
+      // scrollList.scrollTop = 0
       this.listScrollIns.scrollToTop()
     },
 
     getScroll: function () {
+      console.log(this.$refs.list.scrollTop, 'this.$refs.list')
       return this.$refs.list.scrollTop
+    },
+    // _setScoll: (v) => {
+    //   this.$refs.list.scrollToTop = v
+    // },
+    getSize: function () {
+      return this.resArr.length
+    },
+    scrollToIndex: function () {
+      this.listScrollIns.scrollToIndex(10)
     },
   },
 }
@@ -131,5 +155,6 @@ export default {
 .list {
   display: flex;
   flex-direction: column;
+  // overflow-y: auto;
 }
 </style>

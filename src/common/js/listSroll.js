@@ -17,6 +17,8 @@ export default class ListScroll {
       listSize,
       renderFunction,
       getDomHeightFunction,
+      _setScoll,
+      scrollDom,
     } = ops;
 
     if (!itemHeight || typeof itemHeight !== 'number') {
@@ -44,7 +46,8 @@ export default class ListScroll {
     this.firstItem = document.getElementsByClassName('_first');
     this.lastItem = document.getElementsByClassName('_last')
     this.startEntry = 0
-
+    this._setScoll = _setScoll
+    this.scrollDom = scrollDom
     this.domDataCache = {
       currentPaddingTop: 0,
       currentPaddingBottom: 0,
@@ -261,10 +264,46 @@ export default class ListScroll {
     };
     console.log('reset 操作')
     this.renderFunction(0)
+    this.scrollDom.scrollTop = 0;
+    console.log(this.scrollDom, 'scrollDom')
     console.log(this.container.style.paddingTop, 'this.container.style.paddingTop')
     this.container.style.paddingTop = `0px`;
     this.container.style.paddingBottom = `0px`;
     this.startObserver()
+  }
+  async scrollToIndex(firstIndex) {
+    const {
+      currentIndex
+    } = this.domDataCache;
+    let bool = currentIndex <= firstIndex;  // 向下移动为真
+    console.log(firstIndex, currentIndex, bool, 'scrollToIndex')
+    await this.renderFunction(firstIndex);
+    await this.getPadding(firstIndex)
+    // await this.adjustPaddings(bool, firstIndex);
+    this.updateDomDataCache({
+      currentIndex: firstIndex,
+    });
+  }
+  getPadding(firstIndex) {
+    // direction => true: bottom, false: top 
+    // 对于这种情况，我们进行默认操作，不设置padding-bottom 而是选择设置padding-top
+    // padding-bottom 直接置为0
+    // 向下滚动
+    let start = 0;
+    let end = firstIndex;
+    let domHeight = this.getDomHeightFunction()
+    console.log(domHeight, start, end, 'getPadding')
+    const distance = this.getArrSum(domHeight, start, end)
+    this.container.style.paddingBottom = `0px`;
+    this.container.style.paddingTop = `${distance}px`;
+    // this._setScoll(0)
+    this.scrollDom.scrollTop = distance
+    this.updateDomDataCache({
+      currentPaddingTop: distance,
+      currentPaddingBottom: 0,
+      bottomSentinelPreviousY: 0,
+      topSentinelPreviousY: distance
+    });
   }
   // 开始监测
   startObserver() {

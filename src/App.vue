@@ -35,21 +35,37 @@ provide('request', request)
 const list = ref(null)
 const mylist = ref(null)
 const reset = () => {
-  mylist.value.scrollTop = 0
+  // list.value.getScroll()
+  // list.value.scrollTop = 0
+  // console.log(mylist.value.scrollTop, '1')
+  // console.log(list.value.scrollTop, '2')
   list.value.scrollToTop()
+}
+const scrollToIndex = () => {
+  // console.log(mylist.value)
+  // mylist.value.scrollTop = 0
+  list.value.scrollToIndex(10)
+}
+
+const scrollInstance = () => {
+  // console.log(mylist.value)
+  return mylist.value
 }
 </script>
 
 <template>
   <div>
     <button @click="reset">reset</button>
+    <button @click="scrollToIndex">scrollToIndex</button>
   </div>
   <div class="mylist" ref="mylist">
     <ListDOM
       ref="list"
+      :listHeight="600"
       :resArr="arr"
       :visualDomCount="4"
       :domHeight="150"
+      :scrollInstance="scrollInstance"
       @request="request"
     >
       <template v-slot:list="slotProps">
