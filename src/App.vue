@@ -1,7 +1,7 @@
 <script setup>
 // This starter template is using Vue 3 <script setup> SFCs
 // Check out https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup'
-import { ref, provide } from 'vue'
+import { ref, provide, computed } from 'vue'
 import ListDOM from './components/listDOM.vue'
 // import {ListDOM} from '../dist/vue-virtual-list.es'
 // import
@@ -35,6 +35,7 @@ provide('request', request)
 const list = ref(null)
 const mylist = ref(null)
 const reset = () => {
+  console.log(mylist.value, 'mylist')
   // list.value.getScroll()
   // list.value.scrollTop = 0
   // console.log(mylist.value.scrollTop, '1')
@@ -47,8 +48,10 @@ const scrollToIndex = () => {
   list.value.scrollToIndex(10)
 }
 
+// const scrollInstance = computed(() => {
+//   return mylist.value
+// })
 const scrollInstance = () => {
-  // console.log(mylist.value)
   return mylist.value
 }
 </script>
@@ -57,6 +60,7 @@ const scrollInstance = () => {
   <div>
     <button @click="reset">reset</button>
     <button @click="scrollToIndex">scrollToIndex</button>
+    <button @click="scrollInstance">{{ scrollInstance }}</button>
   </div>
   <div class="mylist" ref="mylist">
     <ListDOM

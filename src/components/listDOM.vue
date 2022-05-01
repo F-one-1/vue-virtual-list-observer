@@ -49,10 +49,9 @@ export default {
   },
   inject: ['request'],
   mounted() {
-    // let dom = this.scrollInstance()
-    // console.log(dom, 'this.scrollInstance')
     const scrollDom = this.scrollInstance()
-    this.$refs.list.style.height = `${this.listHeight}px`
+    // console.log(scrollDom, 'scrollDom')
+    // this.$refs.list.style.height = `${this.listHeight}px`
     console.log(this.$refs.list.style)
     this.arrDom = this.resArr
     this.container = document.getElementById('list')
@@ -124,6 +123,7 @@ export default {
 
       this.listScrollIns.startObserver()
     })
+    this.MonitorScroll()
   },
   methods: {
     scrollToTop: function () {
@@ -144,8 +144,45 @@ export default {
     getSize: function () {
       return this.resArr.length
     },
-    scrollToIndex: function () {
-      this.listScrollIns.scrollToIndex(10)
+    scrollToIndex: function (index) {
+      this.listScrollIns.scrollToIndex(index)
+    },
+    MonitorScroll: function () {
+      setInterval(() => {
+        let paddingTop = parseInt(this.container.style.paddingTop.slice(0, -2))
+        const scrollDom = this.scrollInstance()
+        let scrollVTop = scrollDom.scrollTop
+        // console.log(this.$refs.list.clientHeight, 'clientHeight')
+        // console.log(scrollVTop, paddingTop, '---')
+        if (paddingTop > scrollVTop + 200) {
+          let [index, paddingV] = this.getIndex(scrollVTop)
+          this.scrollToIndex(index)
+        } else {
+          const CHeight = this.$refs.list.clientHeight
+          const PBottom = parseInt(
+            this.container.style.paddingBottom.slice(0, -2)
+          )
+          if (scrollVTop > CHeight - PBottom + 100) {
+            let [index, paddingV] = this.getIndex(scrollVTop)
+            this.scrollToIndex(index)
+          }
+        }
+      }, 200)
+    },
+    getIndex: function (topIns) {
+      let count = 0
+      let DomIndex = 0
+      let DomsHeight = 0
+      for (let i = 0; i < this.arrDomHeight.length; i++) {
+        count += this.arrDomHeight[i]
+        if (count <= topIns) {
+          DomIndex = i
+          DomsHeight = count
+        } else {
+          return [DomIndex, DomsHeight]
+        }
+      }
+      return [DomIndex, DomsHeight]
     },
   },
 }
