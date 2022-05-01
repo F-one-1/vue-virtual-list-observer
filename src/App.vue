@@ -60,7 +60,7 @@ const scrollInstance = () => {
   <div>
     <button @click="reset">reset</button>
     <button @click="scrollToIndex">scrollToIndex</button>
-    <button @click="scrollInstance">{{ scrollInstance }}</button>
+    <!-- <button @click="scrollInstance">{{ scrollInstance }}</button> -->
   </div>
   <div class="mylist" ref="mylist">
     <ListDOM
