@@ -6,7 +6,7 @@ keyword: intersectionObserver scroll-list
 
 * use intersectionObserver , faster 
 
-* Only 2 required props, simple and very easy to use.
+* Only 3 required props, simple and very easy to use.
 
 * Big data list with high render performance and efficient.
 
@@ -20,7 +20,9 @@ keyword: intersectionObserver scroll-list
 
 ## live demo1
 
-[codeSandBox](https://codesandbox.io/s/youthful-thompson-xetg84)
+[codeSandBox](https://codesandbox.io/s/youthful-thompson-xetg84)  Perhaps there are no examples of using the latest methods and props
+
+> newest demo checked by git clone and yarn
 
 
 ```
@@ -28,6 +30,8 @@ npm install vue-virtual-list-observer
 ```
 
 or
+
+There is no overflow: Auto | scroll defined inside this component, which is controlled by the external parent element, so that you can better customize the progress bar style and so on. But at the same time, the component cannot spontaneously obtain the attributes of rolling elements, such as scrolltop, so you need to obtain the ref rolling component instance and pass it to
 
 ```
 yarn add vue-virtual-list-observer
@@ -37,10 +41,11 @@ yarn add vue-virtual-list-observer
 
 ### Required props
 
-| **&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Prop&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;** | **Type** | **Description**                                              |
-| ------------------------------------------------------------ | -------- | :----------------------------------------------------------- |
-| visualDomCount                                               | Number   | Number of elements visible in the list.It is worth noting that the number of render Doms is usually greater than the number of visualDoms |
-| resArr                                                       | Array[]  | The source array built for list, The effect and logic are the same as the real list |
+| **&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Prop&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;** | **Type**                                     | **Description**                                              |
+| ------------------------------------------------------------ | -------------------------------------------- | :----------------------------------------------------------- |
+| visualDomCount                                               | Number                                       | Number of elements visible in the list.It is worth noting that the number of render Doms is usually greater than the number of visualDoms |
+| resArr                                                       | Array[]                                      | The source array built for list, The effect and logic are the same as the real list |
+| scrollInstance                                               | function(){return HTMLDivElement           } | There is no overflow: Auto scroll defined inside ListDOM, which is controlled by the external parent element, so that you can better customize the progress bar style and so on. But at the same time, the component cannot spontaneously obtain the attributes of rolling elements, such as scrolltop, so you need to obtain the ref rolling component instance and pass it to ListDOM |
 
 ## Public methods (provide,emit)
 
@@ -52,10 +57,11 @@ yarn add vue-virtual-list-observer
 
 #### public methods(ref)
 
-| Method      | Description                            |
-| :---------- | -------------------------------------- |
-| getScroll   | Get the scrollTop distance of the list |
-| scrollToTop | set scroll position to ListTop.        |
+| Method        | Description                            |
+| :------------ | -------------------------------------- |
+| getScroll     | Get the scrollTop distance of the list |
+| scrollToTop   | set scroll position to ListTop.        |
+| scrollToIndex | set scroll position to  resArr[index]  |
 
 
 

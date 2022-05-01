@@ -1,6 +1,5 @@
 <template>
   <div class="list" id="list" ref="list">
-    <!-- <div v-for="" ref=""></div> -->
     <div
       class="list-item"
       v-for="(item, index) in arrDom"
