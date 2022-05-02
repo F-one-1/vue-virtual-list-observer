@@ -23,15 +23,12 @@ keyword: intersectionObserver scroll-list
 [codeSandBox](https://codesandbox.io/s/xenodochial-rain-ujg47n)  
 
 > newest demo checked by git clone and yarn && yarn dev
-> 
 
 ```
 npm install vue-virtual-list-observer 
 ```
 
 or
-
-There is no overflow: Auto | scroll defined inside this component, which is controlled by the external parent element, so that you can better customize the progress bar style and so on. But at the same time, the component cannot spontaneously obtain the attributes of rolling elements, such as scrolltop, so you need to obtain the ref rolling component instance and pass it to
 
 ```
 yarn add vue-virtual-list-observer
@@ -42,10 +39,21 @@ yarn add vue-virtual-list-observer
 ### Required props
 
 | **&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Prop&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;** | **Type**                                     | **Description**                                              |
-| ------------------------------------------------------------ | -------------------------------------------- | :----------------------------------------------------------- |
+| :----------------------------------------------------------- | -------------------------------------------- | :----------------------------------------------------------- |
 | visualDomCount                                               | Number                                       | Number of elements visible in the list.It is worth noting that the number of render Doms is usually greater than the number of visualDoms |
 | resArr                                                       | Array[]                                      | The source array built for list, The effect and logic are the same as the real list |
-| scrollInstance                                               | function(){return HTMLDivElement           } | There is no overflow: Auto scroll defined inside ListDOM, which is controlled by the external parent element, so that you can better customize the progress bar style and so on. But at the same time, the component cannot spontaneously obtain the attributes of rolling elements, such as scrolltop, so you need to obtain the ref rolling component instance and pass it to ListDOM |
+| scrollInstance                                               | function(){return HTMLDivElement           } | Don't have overflow css defined inside the ListDOM component, and it is handed over to the outer parent element to control the scroll bar properties more conveniently for the user.         So you need to set the overflow: auto \| scroll property in the parent element and wrap it in a function passing it to the ListDom as a prop. (Because  ListDom is not scrollable, the value of scrollTop cannot be obtained [demo](https://codesandbox.io/s/xenodochial-rain-ujg47n)) |
+
+#### Option props
+
+| **Prop**    | **Type** | **Description**                                              |
+| :---------- | -------- | :----------------------------------------------------------- |
+| domHeight   | Number   | Approximate height of list item, usually used to handle edge cases |
+| scrollAnima | Boolean  | scrollToTop has a scrolling effect,not directly              |
+
+
+
+
 
 ## Public methods (provide,emit)
 
