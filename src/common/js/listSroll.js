@@ -19,6 +19,7 @@ export default class ListScroll {
       getDomHeightFunction,
       _setScoll,
       scrollDom,
+      scrollAnima,
     } = ops;
 
     if (!itemHeight || typeof itemHeight !== 'number') {
@@ -48,6 +49,7 @@ export default class ListScroll {
     this.startEntry = 0
     this._setScoll = _setScoll
     this.scrollDom = scrollDom
+    this.scrollAnima = scrollAnima
     this.domDataCache = {
       currentPaddingTop: 0,
       currentPaddingBottom: 0,
@@ -263,12 +265,22 @@ export default class ListScroll {
       bottomSentinelPreviousRatio: 0
     };
     console.log('reset 操作')
-    this.renderFunction(0)
-    this.scrollDom.scrollTop = 0;
-    console.log(this.scrollDom, 'scrollDom')
-    console.log(this.container.style.paddingTop, 'this.container.style.paddingTop')
-    this.container.style.paddingTop = `0px`;
-    this.container.style.paddingBottom = `0px`;
+    // this.renderFunction(0)
+    if (this.scrollAnima) {
+      this.animationToTop(this.scrollDom)
+    } else {
+      this.renderFunction(0)
+      this.scrollDom.scrollTop = 0;
+      console.log(this.scrollDom, 'scrollDom')
+      console.log(this.container.style.paddingTop, 'this.container.style.paddingTop')
+      this.container.style.paddingTop = `0px`;
+      this.container.style.paddingBottom = `0px`;
+    }
+    // this.scrollDom.scrollTop = 0;
+    // console.log(this.scrollDom, 'scrollDom')
+    // console.log(this.container.style.paddingTop, 'this.container.style.paddingTop')
+    // this.container.style.paddingTop = `0px`;
+    // this.container.style.paddingBottom = `0px`;
     this.startObserver()
   }
   async scrollToIndex(firstIndex) {
@@ -309,7 +321,30 @@ export default class ListScroll {
   startObserver() {
     this.initIntersectionObserver();
   }
+  animationToTop(scrollDomIns) {
+    const beginTime = Date.now()
+    // 初始位置
+    const beginValue = scrollDomIns.scrollTop
+    const rAF =
+      window.requestAnimationFrame || ((func) => setTimeout(func, 16))
+    const frameFunc = () => {
+      // 进度，500ms 内将页面滚动到顶部
+      const progress = (Date.now() - beginTime) / 500
+      if (progress < 1) {
+        const cubic = (value) => Math.pow(value, 3)
 
+        const easeInOutCubic = (value) =>
+          value < 0.5 ? cubic(value * 2) / 2 : 1 - cubic((1 - value) * 2) / 2
+
+        // 根据进度修改 scrollTop 的值
+        scrollDomIns.scrollTop = beginValue * (1 - easeInOutCubic(progress))
+        rAF(frameFunc)
+      } else {
+        scrollDomIns.scrollTop = 0
+      }
+    }
+    rAF(frameFunc)
+  }
   // 停止监测
   // stopObserver() {}
 }

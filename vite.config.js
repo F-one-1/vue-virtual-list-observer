@@ -22,6 +22,14 @@ export default defineConfig({
           vue: 'Vue'
         }
       }
-    }
+    },
+    minify: 'terser',
+    terserOptions: {
+      compress: {
+        //生产环境时移除console
+        drop_console: true,
+        drop_debugger: true,
+      },
+    },
   }
 })

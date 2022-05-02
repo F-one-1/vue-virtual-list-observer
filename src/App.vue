@@ -125,6 +125,7 @@ const scrollInstance = () => {
   width: 500px;
   height: 600px;
   overflow: auto;
+  // transition: all ;
 }
 .mylist::-webkit-scrollbar-track {
   background-color: #eee;

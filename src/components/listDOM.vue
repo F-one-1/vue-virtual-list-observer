@@ -32,10 +32,12 @@ export default {
     resArr: {
       type: Array,
       default: [],
+      required: true,
     },
     visualDomCount: {
       type: Number,
       default: 5,
+      required: true,
     },
     domHeight: {
       type: Number,
@@ -44,7 +46,13 @@ export default {
     listHeight: {
       type: Number,
     },
-    scrollInstance: {},
+    scrollInstance: {
+      required: true,
+    },
+    scrollAnima: {
+      type: Boolean,
+      default: true,
+    },
   },
   inject: ['request'],
   mounted() {
@@ -117,6 +125,7 @@ export default {
         // 动态的获取DOM的高度
         getDomHeightFunction,
         scrollDom: scrollDom,
+        scrollAnima: this.scrollAnima,
         // _setScoll: this._setScoll,
       })
 
