@@ -84,7 +84,7 @@ yarn add vue-virtual-list-observer
 
 
 
-## quickStart1
+## quickStart
 
 [codeSandBox](https://codesandbox.io/s/xenodochial-rain-ujg47n)
 
