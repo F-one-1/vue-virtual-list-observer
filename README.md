@@ -20,10 +20,10 @@ keyword: intersectionObserver scroll-list
 
 ## live demo1
 
-[codeSandBox](https://codesandbox.io/s/xenodochial-rain-ujg47n)  Perhaps there are no examples of using the latest methods and props
+[codeSandBox](https://codesandbox.io/s/xenodochial-rain-ujg47n)  
 
-> newest demo checked by git clone and yarn
-
+> newest demo checked by git clone and yarn && yarn dev
+> 
 
 ```
 npm install vue-virtual-list-observer 
