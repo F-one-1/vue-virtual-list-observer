@@ -1,14 +1,27 @@
 ## vue-virtual-list-observer
 
-keyword: intersectionObserver scroll-list
+keyword: intersectionObserver scroll-list Scroll animation，quick scroll resolved
+
+<p>
+  <a href="https://npm-stat.com/charts.html?package=vue-virtual-list-observer">
+    <img alt="Downloads" src="https://img.shields.io/npm/dm/vue-virtual-list-observer.svg">
+  </a>
+  <a href="https://npmjs.com/package/vue-virtual-list-observer">
+    <img alt="Version" src="https://img.shields.io/npm/v/vue-virtual-list-observer.svg"/>
+  </a>
+  <!-- <a href="https://vuejs.org/">
+    <img alt="Vue version" src="https://img.shields.io/badge/vue-%3E=2.3.0-brightgreen.svg"/>
+  </a> -->
+  <a href="http://packagequality.com/#?package=vue-virtual-list-observer">
+    <img alt="Quality" src="https://npm.packagequality.com/shield/vue-virtual-list-observer.svg">
+  </a>
+</p>
 
 ## Advantages
 
-* use intersectionObserver , faster，Scroll animation，quick scroll resolved
-
 * Only 3 required props, simple and very easy to use.
 
-* Big data list with high render performance and efficient.
+* intersectionObserver efficient and resolve Fast scrolling  in a white screen.
 
 * Highly customizable and has a live demo to get started quickly
 
