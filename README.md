@@ -4,7 +4,7 @@ keyword: intersectionObserver scroll-list
 
 ## Advantages
 
-* use intersectionObserver , faster 
+* use intersectionObserver , faster，Scroll animation，quick scroll resolved
 
 * Only 3 required props, simple and very easy to use.
 
