@@ -35,7 +35,7 @@ const request = () => {
 provide('request', request)
 const list = ref(null)
 const mylist = ref(null)
-const reset = () => {
+const scrollToTop = () => {
   console.log(mylist.value, 'mylist')
   // list.value.getScroll()
   // list.value.scrollTop = 0
@@ -59,7 +59,7 @@ const scrollInstance = () => {
 
 <template>
   <div>
-    <button @click="reset">reset</button>
+    <button @click="scrollToTop">scrollToTop</button>
     <!-- <button @click="scrollToIndex">scrollToIndex</button> -->
     <!-- <button @click="scrollInstance">{{ scrollInstance }}</button> -->
   </div>
