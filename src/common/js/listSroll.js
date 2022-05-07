@@ -121,7 +121,9 @@ export default class ListScroll {
       }
     }
 
-
+    if(firstIndex === 0){
+      newCurrentPaddingBottom = 0
+    }
     // console.log(newCurrentPaddingBottom, newCurrentPaddingTop, 'newCurrentPaddingBottom, newCurrentPaddingTop');
     container.style.paddingBottom = `${newCurrentPaddingBottom}px`;
     container.style.paddingTop = `${newCurrentPaddingTop}px`;
@@ -276,6 +278,7 @@ export default class ListScroll {
       this.container.style.paddingTop = `0px`;
       this.container.style.paddingBottom = `0px`;
     }
+    this.startEntry = 0
     // this.scrollDom.scrollTop = 0;
     // console.log(this.scrollDom, 'scrollDom')
     // console.log(this.container.style.paddingTop, 'this.container.style.paddingTop')
@@ -344,6 +347,7 @@ export default class ListScroll {
       }
     }
     rAF(frameFunc)
+    // this.startEntry = 0
   }
   // 停止监测
   // stopObserver() {}

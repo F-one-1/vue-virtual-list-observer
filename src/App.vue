@@ -27,6 +27,7 @@ const request = () => {
         })
       }
       resolve()
+      loader = false
       console.log('异步处理完成')
     }, 2000)
   })

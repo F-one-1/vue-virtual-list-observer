@@ -25,6 +25,7 @@ export default {
       arrDomHeightPrefix: [],
       listScrollIns: null,
       container: null,
+      judgeToTop: 0
     }
   },
   emits: ['request'],
@@ -57,13 +58,9 @@ export default {
   inject: ['request'],
   mounted() {
     const scrollDom = this.scrollInstance()
-    // console.log(scrollDom, 'scrollDom')
-    // this.$refs.list.style.height = `${this.listHeight}px`
-    console.log(this.$refs.list.style)
     this.arrDom = this.resArr
     this.container = document.getElementById('list')
     const lis = document.querySelectorAll('#m-listContainer li')
-    // console.log(container,lis,'1111')
     const renderPage = async (firstIndex) => {
       let end = 0
       let count = 0
@@ -74,8 +71,11 @@ export default {
         // this.$emit('request')
         await this.request()
         count++
+        if(this.judgeToTop===1){
+          this.judgeToTop = 0
+          break
+        }
       }
-      await console.log('子组件异步')
       // if()
       const UpdateDOMList = () => {
         if (firstIndex + this.visualDomCount * 5 > this.resArr.length) {
@@ -135,15 +135,15 @@ export default {
   },
   methods: {
     scrollToTop: function () {
-      // console.log(this.listScrollIns)
       let scrollList = this.scrollInstance()
-      // console.log(scrollList.scrollTop)
       // scrollList.scrollTop = 0
       this.listScrollIns.scrollToTop()
+      // this.resArr = this.resArr.slice(0, 20)
+      this.judgeToTop = 1
+      console.log(this.resArr, 'this.resArr')
     },
 
     getScroll: function () {
-      console.log(this.$refs.list.scrollTop, 'this.$refs.list')
       return this.$refs.list.scrollTop
     },
     // _setScoll: (v) => {
@@ -175,7 +175,7 @@ export default {
             this.scrollToIndex(index)
           }
         }
-      }, 200)
+      }, 100)
     },
     getIndex: function (topIns) {
       let count = 0
