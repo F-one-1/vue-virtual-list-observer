@@ -1,6 +1,10 @@
 ## vue-virtual-list-observer
 
-keyword: intersectionObserver scroll-list Scroll animation，quick scroll resolved
+keyword: **intersectionObserver scroll-list Scroll animation，quick scroll resolved**
+
+```
+yarn add vue-virtual-list-observer
+```
 
 <p>
   <a href="https://npm-stat.com/charts.html?package=vue-virtual-list-observer">
