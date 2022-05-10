@@ -124,3 +124,8 @@ So async need to use provide && return promise instance
 > In the request function you usually request the backend's interface and display it on the screen
 
 If not as mentioned above, __no limit__
+
+
+### License
+
+[MIT License](https://github.com/F-one-1/vue-virtual-list-observer/blob/master/LICENSE).
