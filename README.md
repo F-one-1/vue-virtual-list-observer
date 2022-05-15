@@ -21,6 +21,7 @@ yarn add vue-virtual-list-observer
   </a>
 </p>
 
+
 ## Advantages
 
 * Only 3 required props, simple and very easy to use.
@@ -59,7 +60,7 @@ yarn add vue-virtual-list-observer
 | :----------------------------------------------------------- | -------------------------------------------- | :----------------------------------------------------------- |
 | visualDomCount                                               | Number                                       | Number of elements visible in the list.It is worth noting that the number of render Doms is usually greater than the number of visualDoms |
 | resArr                                                       | Array[]                                      | The source array built for list, The effect and logic are the same as the real list |
-| scrollInstance                                               | function(){return HTMLDivElement           } | Don't have overflow css defined inside the ListDOM component, and it is handed over to the outer parent element to control the scroll bar properties more conveniently for the user.         So you need to set the overflow: auto \| scroll property in the parent element and wrap it in a function passing it to the ListDom as a prop. (Because  ListDom is not scrollable, the value of scrollTop cannot be obtained [demo](https://codesandbox.io/s/xenodochial-rain-ujg47n)) |
+| scrollInstance                                               | function(){return HTMLDivElement           } | Need to transfer the nearest scrollable ancestor of the ListDOM component             (for custom scroll bar and else) |
 
 #### Option props
 
