@@ -38,7 +38,7 @@ yarn add vue-virtual-list-observer
 
 ## live demo1
 
-[codeSandBox](https://codesandbox.io/s/festive-easley-wr4cd2)  
+[codeSandBox](https://codesandbox.io/s/festive-easley-wr4cd2?file=/src/App.vue)  
 
 > newest demo checked by git clone and yarn && yarn dev
 
@@ -104,7 +104,7 @@ yarn add vue-virtual-list-observer
 
 ## quickStart
 
-[codeSandBox](https://codesandbox.io/s/festive-easley-wr4cd2)
+[codeSandBox](https://codesandbox.io/s/festive-easley-wr4cd2?file=/src/App.vue)
 
 
 ## Attention 
