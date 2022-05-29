@@ -121,7 +121,7 @@ export default class ListScroll {
       }
     }
 
-    if(firstIndex === 0){
+    if (firstIndex === 0) {
       newCurrentPaddingBottom = 0
     }
     // console.log(newCurrentPaddingBottom, newCurrentPaddingTop, 'newCurrentPaddingBottom, newCurrentPaddingTop');
@@ -175,7 +175,7 @@ export default class ListScroll {
       && currentRatio >= topSentinelPreviousRatio
     ) {
       // 设置bottomTop
-      console.log('topSentCallback.. go');
+      // console.log('topSentCallback.. go');
       const firstIndex = this.getWindowFirstIndex(false);
       await this.renderFunction(firstIndex);
       await this.adjustPaddings(false, firstIndex);
@@ -213,7 +213,7 @@ export default class ListScroll {
       && currentRatio >= bottomSentinelPreviousRatio
       && isIntersecting
     ) {
-      console.log('botSentCallback.. go');
+      // console.log('botSentCallback.. go');
       // 设置paddingTop
       const firstIndex = this.getWindowFirstIndex(true);
       await this.renderFunction(firstIndex);
@@ -266,15 +266,15 @@ export default class ListScroll {
       bottomSentinelPreviousY: 0,
       bottomSentinelPreviousRatio: 0
     };
-    console.log('reset 操作')
+    // console.log('reset 操作')
     // this.renderFunction(0)
     if (this.scrollAnima) {
       this.animationToTop(this.scrollDom)
     } else {
       this.renderFunction(0)
       this.scrollDom.scrollTop = 0;
-      console.log(this.scrollDom, 'scrollDom')
-      console.log(this.container.style.paddingTop, 'this.container.style.paddingTop')
+      //console.log(this.scrollDom, 'scrollDom')
+      //console.log(this.container.style.paddingTop, 'this.container.style.paddingTop')
       this.container.style.paddingTop = `0px`;
       this.container.style.paddingBottom = `0px`;
     }
@@ -291,7 +291,7 @@ export default class ListScroll {
       currentIndex
     } = this.domDataCache;
     let bool = currentIndex <= firstIndex;  // 向下移动为真
-    console.log(firstIndex, currentIndex, bool, 'scrollToIndex')
+    // console.log(firstIndex, currentIndex, bool, 'scrollToIndex')
     await this.renderFunction(firstIndex);
     await this.getPadding(firstIndex)
     // await this.adjustPaddings(bool, firstIndex);
@@ -307,7 +307,7 @@ export default class ListScroll {
     let start = 0;
     let end = firstIndex;
     let domHeight = this.getDomHeightFunction()
-    console.log(domHeight, start, end, 'getPadding')
+    // console.log(domHeight, start, end, 'getPadding')
     const distance = this.getArrSum(domHeight, start, end)
     this.container.style.paddingBottom = `0px`;
     this.container.style.paddingTop = `${distance}px`;

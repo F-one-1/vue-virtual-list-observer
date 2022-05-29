@@ -25,7 +25,7 @@ export default {
       arrDomHeightPrefix: [],
       listScrollIns: null,
       container: null,
-      judgeToTop: 0
+      judgeToTop: 0,
     }
   },
   emits: ['request'],
@@ -71,7 +71,7 @@ export default {
         // this.$emit('request')
         await this.request()
         count++
-        if(this.judgeToTop===1){
+        if (this.judgeToTop === 1) {
           this.judgeToTop = 0
           break
         }
@@ -140,7 +140,7 @@ export default {
       this.listScrollIns.scrollToTop()
       // this.resArr = this.resArr.slice(0, 20)
       this.judgeToTop = 1
-      console.log(this.resArr, 'this.resArr')
+      // console.log(this.resArr, 'this.resArr')
     },
 
     getScroll: function () {

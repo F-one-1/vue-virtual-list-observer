@@ -3,7 +3,7 @@
 // Check out https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup'
 import { ref, provide, computed } from 'vue'
 import ListDOM from './components/listDOM.vue'
-// import {ListDOM} from '../dist/vue-virtual-list.es'
+//import { ListDOM } from '../dist/vue-virtual-list.es'
 // import
 let arr = []
 for (let i = 0; i < 20; i++) {
@@ -16,8 +16,6 @@ let loader = true
 const request = () => {
   loader = true
   let end = arr[arr.length - 1].key
-
-  // console.log('异步开始')
   return new Promise((resolve) => {
     setTimeout(() => {
       for (let i = end + 1; i <= end + 10; i++) {
@@ -28,7 +26,6 @@ const request = () => {
       }
       resolve()
       loader = false
-      console.log('异步处理完成')
     }, 2000)
   })
 }
@@ -36,22 +33,12 @@ provide('request', request)
 const list = ref(null)
 const mylist = ref(null)
 const scrollToTop = () => {
-  console.log(mylist.value, 'mylist')
-  // list.value.getScroll()
-  // list.value.scrollTop = 0
-  // console.log(mylist.value.scrollTop, '1')
-  // console.log(list.value.scrollTop, '2')
   list.value.scrollToTop()
 }
 const scrollToIndex = () => {
-  // console.log(mylist.value)
-  // mylist.value.scrollTop = 0
   list.value.scrollToIndex(10)
 }
 
-// const scrollInstance = computed(() => {
-//   return mylist.value
-// })
 const scrollInstance = () => {
   return mylist.value
 }
