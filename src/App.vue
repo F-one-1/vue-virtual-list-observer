@@ -3,8 +3,8 @@
 // Check out https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup'
 import { ref, provide, computed } from 'vue'
 import ListDOM from './components/listDOM.vue'
-//import { ListDOM } from '../dist/vue-virtual-list.es'
-// import
+// import { ListDOM } from 'vue-virtual-list-observer'
+// yarn add vue-virtual-list-observer && import { ListDOM } from 'vue-virtual-list-observer'
 let arr = []
 for (let i = 0; i < 20; i++) {
   arr.push({

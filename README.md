@@ -101,12 +101,6 @@ yarn add vue-virtual-list-observer
 
 
 
-
-## quickStart
-
-[codeSandBox](https://codesandbox.io/s/festive-easley-wr4cd2?file=/src/App.vue)
-
-
 ## Attention 
 
 for the public method(provide,emit)  request
