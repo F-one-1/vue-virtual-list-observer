@@ -38,7 +38,7 @@ yarn add vue-virtual-list-observer
 
 ## live demo1
 
-[codeSandBox](https://codesandbox.io/s/festive-easley-wr4cd2?file=/src/App.vue)  
+[stackblitz](https://stackblitz.com/github/F-one-1/vue3-virtual-scroll-list?file=src%2FApp.vue)  
 
 > newest demo checked by git clone and yarn && yarn dev
 
